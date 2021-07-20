@@ -1,9 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Todo{
-  final String name;
-  final String content;
-  final bool complete;
+class TodoModel {
+  String? todoId;
+  String? content;
+  bool?  done;
 
-  Todo(this.name, this.content, this.complete);
+  TodoModel({
+    this.todoId,
+    this.content,
+    this.done,
+  });
 
+  TodoModel.fromDocumentSnapshot({DocumentSnapshot? documentSnapshot}) {
+    todoId = documentSnapshot.id;
+    content = documentSnapshot.data()['content'] as String;
+    done = documentSnapshot.data()['done'] as bool;
+  }
 }
